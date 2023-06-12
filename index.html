@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Sewa - Properti</title>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #9f9f9f; position: fixed; top: 0; z-index: 1000; width: 100vw;">
+            <div class="container-fluid">
+                <a href="./index.html" class="logo">Sewa<span>Properti</span></a>
+                <div class="d-flex">
+                    <input type="text" id="inputBar" class="text" placeholder="Cari...">
+                    <button onclick="greedyAl()" class="btn btn-secondary mx-2">Filter by Greedy</button>
+                    <button onclick="dynamicAl()" class="btn btn-secondary mx-2">Filter by Dynamic Programming</button>
+                    <button onclick="clearAl()" class="btn btn-secondary mx-2">Show All</button>
+                </div>
+            </div>
+        </nav>
+        <section class="home pt-5 mt-5" id="home">
+            <div class="container home-wrapper">
+                <div class="row" id="rowRumah">
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body> <p>Running Time - Greedy: <span id="greedy-time"></span> ms</p>
+</body> <p>Running Time - DP: <span id="dp-time"></span> ms</p>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
+    integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+<script src="assets/js/main.js"></script>
+<script>
+    function greedyAl() {
+        const greedyStartTime = performance.now()
+        let hasil = selectHouseByBudgetGreedy(dataRumah, $('#inputBar').val())
+        const greedyEndTime = performance.now()
+        const greedyRunningTime = greedyEndTime - greedyStartTime
+        $('#greedy-time').text(greedyRunningTime)
+        show(hasil)
+    }
+    function dynamicAl() {
+        const dpStartTime = performance.now()
+        let hasil = selectHouseByBudgetDP(dataRumah, $('#inputBar').val())
+        const dpEndTime = performance.now()
+        const dpRunningTime = dpEndTime-dpStartTime
+        $('#dp-time').text(dpRunningTime)
+        show(hasil)
+    }
+    function clearAl() {
+        show(dataRumah)
+    }
+    function show(data) {
+        $('#rowRumah').html('')
+        data.forEach(element => {
+            let stringHtml = ' <div class="col-6 mb-3"><div class="card bg-gray rounded p-2 py-4 border-0 rounded"><div class="row"> <img class="col-6 rounded" src="' + element.img + '" alt="" srcset=""> <div class="col-6">'
+            stringHtml += '<span class="bg-info d-block m-2 p-1 rounded-pill px-3"> Luas Tanah :' + element.luas + '</span>'
+            stringHtml += '<span class="bg-info d-block m-2 p-1 rounded-pill px-3"> Type :' + element.type + '</span>'
+            stringHtml += '<span class="bg-info d-block m-2 p-1 rounded-pill px-3"> Harga :' + element.harga + '</span>'
+            stringHtml += '</div></div></div></div></div>'
+            $('#rowRumah').append(stringHtml)
+        });
+    }
+    $(document).ready(function () {
+        clearAl();
+    });
+</script>
