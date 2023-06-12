@@ -1,0 +1,24 @@
+:root{
+    --main-color : #000000;
+    --second-color: #ffe5cd;
+    --body-color : #e8e8e8;
+    --active-color:#02c7ce;
+}
+.bg-gray {
+    background-color: rgb(212, 212, 212);
+}
+.rounded{
+    border-radius: 50px !important;
+}
+.logo{
+    font-size: 2rem;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    color: var(--main-color);    
+}
+.logo span{
+    font-size: 2rem;
+    color: var(--second-color);   
+}
+
+
